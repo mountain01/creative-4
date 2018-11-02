@@ -22,19 +22,24 @@ app.controller('MainCtrl', function(socket) {
   };
   socket.on('login', (data) => {
     ctrl.users = data.allUsers;
-    ctrl.messages.push(`${data.user} just logged in`)
+    appendMessage(`${data.user} just logged in`);
   });
   socket.on('logout', (data) => {
     ctrl.users = data.allUsers;
-    ctrl.messages.push(`${data.user} just logged out`)
+    appendMessage(`${data.user} just logged out`);
   });
 
   socket.on('message', (data) => {
+    appendMessage(data.user + ': ' + data.message);
+  })
+
+  function appendMessage(message) {
     messageContainer = document.querySelector('.messages');
     const shouldScroll = messageContainer.scrollTop + messageContainer.clientHeight === messageContainer.scrollHeight;
-    ctrl.messages.push(data.user + ': ' + data.message);
+    ctrl.messages.push(message);
     !shouldScroll && scrollToBottom();
-  })
+
+  }
 
   socket.on('disconnect', () => console.log('you logged out'));
 

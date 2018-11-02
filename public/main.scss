@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw; // height: 100%;
+  // width: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  .login {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+    li {
+      list-style: none;
+    }
+    .online {
+      flex: 0 0 200px; // width: 200px;
+      background-color: cyan;
+      padding: 20px;
+    }
+    .message-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      .messages {
+        flex: 1;
+        background-color: yellow;
+        overflow: auto;
+        padding: 20px;
+      }
+      .input-bar {
+        flex: 0 0 60px;
+        padding: 20px;
+        display: flex;
+        input[type="text"] {
+          flex: 1;
+          margin-right: 10px;
+        }
+        inpu[type="submit"] {
+          flex: 0 0 auto;
+        }
+      }
+    }
+  }
+}

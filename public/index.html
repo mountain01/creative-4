@@ -1,42 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="app">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <title>Whiteboard</title>
-    <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-      #messages { margin-bottom: 40px }
-    </style>
+    <title>Creative 4</title>
+
+    <script src="/scripts/angular/angular.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
   </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-    <script>
-      $(function () {
-        var socket = io();
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-          window.scrollTo(0, document.body.scrollHeight);
-        });
-      });
-    </script>
+
+  <body ng-controller="MainCtrl as $ctrl">
+    <div ng-if="!$ctrl.loggedIn" class="login">
+      <form ng-submit="$ctrl.login(name)">
+        <label>Enter nickname</label>
+        <input type="text" ng-model="name" />
+        <input type="submit" value="Login" />
+      </form>
+      <div ng-if="$ctrl.inUse">nickname in use. Please select a different name</div>
+    </div>
+    <div ng-if="$ctrl.loggedIn" class="main">
+      <div class="online">
+        <h3>Online Users -{{$ctrl.users.length}}-</h3>
+        <ul>
+          <li ng-repeat="user in $ctrl.users track by $index">{{user}}</li>
+        </ul>
+      </div>
+      <div class="message-wrapper">
+        <div class="messages">
+          Welcome {{$ctrl.name}}
+          <ul>
+            <li ng-repeat="message in $ctrl.messages track by $index">{{message}}</li>
+          </ul>
+        </div>
+        <form class="input-bar" ng-submit="$ctrl.submitMessage($ctrl.message)">
+          <input type="text" name="" ng-model="$ctrl.message" />
+          <input type="submit" value="Submit" ng-disabled="!$ctrl.message.length" />
+        </form>
+      </div>
+    </div>
+
+
+    <script src="index.js"></script>
   </body>
+
 </html>

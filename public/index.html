@@ -15,10 +15,10 @@
 
   <body ng-controller="MainCtrl as $ctrl">
     <div ng-if="!$ctrl.loggedIn" class="login">
+      <h1 class="spinner">CS 260 Slackers Chat Thingy</h1>
       <form ng-submit="$ctrl.login(name)">
-        <label>Enter nickname</label>
-        <input type="text" ng-model="name" />
-        <input type="submit" value="Login" />
+        <input type="text" ng-model="name" autofocus placeholder="Enter Nickname" />
+        <input type="submit" value="Login" ng-disabled="!name" />
       </form>
       <div ng-if="$ctrl.inUse">nickname in use. Please select a different name</div>
     </div>
@@ -37,7 +37,7 @@
           </ul>
         </div>
         <form class="input-bar" ng-submit="$ctrl.submitMessage($ctrl.message)">
-          <input type="text" name="" ng-model="$ctrl.message" />
+          <input type="text" name="" ng-model="$ctrl.message" autofocus />
           <input type="submit" value="Submit" ng-disabled="!$ctrl.message.length" />
         </form>
       </div>

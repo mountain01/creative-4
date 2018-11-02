@@ -19,6 +19,22 @@ body .login {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: teal;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    font-size: 80px;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+body .spinner:hover {
+  animation: spin 2s linear infinite;
+  color: blue;
 }
 body .main {
   display: flex;
@@ -29,7 +45,7 @@ body .main li {
 }
 body .main .online {
   flex: 0 0 200px;
-  background-color: cyan;
+  background-color: darkturquoise;
   padding: 20px;
 }
 body .main .message-wrapper {
@@ -40,7 +56,7 @@ body .main .message-wrapper {
 }
 body .main .message-wrapper .messages {
   flex: 1;
-  background-color: yellow;
+  background-color: lightyellow;
   overflow: auto;
   padding: 20px;
 }

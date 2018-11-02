@@ -19,6 +19,24 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: teal;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      font-size: 80px;
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner:hover {
+    animation: spin 2s linear infinite;
+    color: blue;
   }
 
   .main {
@@ -29,7 +47,7 @@ body {
     }
     .online {
       flex: 0 0 200px; // width: 200px;
-      background-color: cyan;
+      background-color: darkturquoise;
       padding: 20px;
     }
     .message-wrapper {
@@ -39,7 +57,7 @@ body {
       height: 100%;
       .messages {
         flex: 1;
-        background-color: yellow;
+        background-color: lightyellow;
         overflow: auto;
         padding: 20px;
       }
